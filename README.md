@@ -1,22 +1,22 @@
 # Clothes Rail 👗
 
-**A virtual try-on tool that solves the £25 billion returns problem — using AI to show you how something will fit before you buy it.**
+**A virtual clothes try-on tool that aims to solve the £9 billion retail returns problem - using AI to show you how something will fit before you buy it.**
 
 🔗 **[Try it live](https://sleek-barge-51657936.figma.site/)**
 
-> **Status: Working prototype.** Measurement input, body avatar morphing, fit predictions, and size recommendations are all working. The garment overlay layer is a documented next iteration — see "What I learned building it" below.
+> **Status: Working prototype.** Measurement input, body avatar morphing, fit predictions, and size recommendations are all working. The garment overlay layer is a documented next iteration - see "What I learned building it" below.
 
 ---
 
 ## The problem
 
-Online clothing returns cost the global retail industry an estimated **$25 billion per year**. The number one reason people return clothes is fit. Not quality. Not colour. **Fit.**
+Online clothing returns cost the global retail industry an estimated **£9 billion per year**. The number one reason people return clothes is fit - not quality, not colour. **Fit.**
 
 Current solutions don't work:
-- **Size guides** — every brand sizes differently; a UK 12 at ASOS is not a UK 12 at Reiss
-- **"True to size" reviews** — subjective, inconsistent, not your body
-- **Virtual mannequins** — show the garment, not the person wearing it
-- **AR try-on tools** — exist, but are typically brand-specific, not cross-retailer, and don't combine items into outfits
+- **Size guides** - every brand sizes differently; a UK 12 at ASOS is not a UK 12 at Reiss
+- **"True to size" reviews** - subjective, inconsistent, not your body
+- **Virtual mannequins** - show the garment, not the person wearing it
+- **AR try-on tools** - exist, but are typically brand-specific, not cross-retailer, and don't combine items into outfits
 
 Clothes Rail is a personal, brand-agnostic try-on layer that works across any retailer.
 
@@ -26,13 +26,13 @@ Clothes Rail is a personal, brand-agnostic try-on layer that works across any re
 
 ### What the user does
 
-1. **Enter measurements** — chest, waist, hips, inseam, height. Takes 2 minutes.
-2. **Add your usual UK size** (optional) — helps calibrate fit predictions across brands
-3. **Add a photo** (optional) — for visual representation; stored locally, never uploaded to any server
-4. **Browse and add items** — paste a product URL or upload an image of a garment
-5. **See your fit** — the tool generates a visual showing the item sized to your measurements, with a fit confidence score and a plain-English note ("this will be loose across the shoulders but fitted at the waist")
-6. **Build an outfit** — combine multiple items to see how they work together
-7. **Own and share your image** — the generated image belongs to you; share with friends, save to notes, screenshot for your basket
+1. **Enter measurements** — chest, waist, hips, height (optional). Takes 2 minutes.
+2. **Add your usual UK size** (optional) - helps calibrate fit predictions across brands
+3. **Add a photo** (optional) - for visual representation; stored locally, never uploaded to any server
+4. **Pick Loose/Regular/Fitted Option**
+5. **See your fit** - the tool generates a visual showing the item sized to your measurements, with a fit confidence score and a plain-English note ("this will be loose across the shoulders but fitted at the waist")
+6. **Build an outfit** - combine multiple items to see how they work together
+7. **Own and share your image** - the generated image belongs to you; share with friends, save to notes, screenshot for your basket
 
 ### What the AI does
 
@@ -40,31 +40,31 @@ Clothes Rail is a personal, brand-agnostic try-on layer that works across any re
 - Interprets size chart data from the retailer if available
 - Applies your measurements to generate a fit prediction
 - Creates a visual representation showing the garment proportioned to your body shape
-- Generates a plain-English fit note — not a score, but an explanation
+- Generates a plain-English fit note - not a score, but an explanation
 
 ---
 
 ## Feedback & evaluation loop
 
-The fit prediction is only as good as what it learns from. Clothes Rail closes the loop with three distinct feedback signals — two explicit, one behavioural.
+The fit prediction is only as good as what it learns from. Clothes Rail closes the loop with three distinct feedback signals - two explicit, one behavioural.
 
-### Signal 1 — Prototype vote (pre-purchase)
+### Signal 1 - Prototype vote (pre-purchase)- post MVP
 
 When a user views their generated fit preview, they can vote thumbs up or down.
 
 > *"Does this look right to you?"*
 
-This captures **perceived fit confidence** at the point of decision. It's a fast, low-friction signal that tells the system whether the user trusts the prediction enough to buy — and if not, why not (optional short prompt: *too big / too small / doesn't look like me*).
+This captures **perceived fit confidence** at the point of decision. It's a fast, low-friction signal that tells the system whether the user trusts the prediction enough to buy - and if not, why not (optional short prompt: *too big / too small / doesn't look like me*).
 
 ### Signal 2 — Post-receive vote (follow-up email)
 
 After the estimated delivery window, the user receives a short follow-up email with the item name and a single question:
 
-> *"Did it fit as expected?"* 👍 👎
+> *"Did it fit as expected?"* 👍 👎- post MVP
 
 One click. No login required. The response is tied back to the original prediction via a unique item token in the email link. This captures the **ground truth of the actual fit** — the moment between "I bought it" and "I returned it."
 
-### Signal 3 — Return rate (behavioural ground truth)
+### Signal 3 - Return rate (behavioural ground truth)
 
 The hardest signal and the most honest one. If a predicted fit leads to a return, the prediction was wrong regardless of what the user voted. Return events are tracked per item per customer and fed back into the evaluation layer.
 
@@ -93,7 +93,7 @@ Clothes Rail is built on a **local-first** principle:
 
 - Your photo never leaves your device
 - Your measurements are stored locally, not in a user database
-- Generated images are yours — not used for training, not retained by the service
+- Generated images are yours - not used for training, not retained by the service
 - No account required to use the core features
 
 This is a deliberate product decision, not just a technical constraint. Asking someone to upload a photo of their body to a retail platform requires a level of trust that most platforms haven't earned. Keeping that data local removes the barrier.
@@ -112,7 +112,9 @@ This is a deliberate product decision, not just a technical constraint. Asking s
 
 ## What I learned building it
 
-Building the prototype forced decisions I hadn't anticipated. This is where the interesting stuff happened.
+Building the prototype forced decisions I hadn't anticipated. This is where the interesting stuff happened. When I came across a technical problem, AI tried to fix it - I built 92 different versions of this prototype. AI kept offering new solutions - it is built that way. But what was really happening, the build was drifting from what I originally set out to build. 
+I could have pivoted to a different product, abandon the build or review scope. I did the third, I adjusted MVP. 
+I learned a lot during this build - my main aim has always been to experience building with AI and I have achieved that. I learned about its strengths as a tool and also about its weaknesses. 
 
 ### The avatar baseline problem
 
@@ -158,7 +160,7 @@ Shipping a prototype that works for what it can do, and is honest about what it 
 
 ## The market case (in brief)
 
-- UK online clothing returns: ~£7 billion annually
+- UK online clothing returns: ~£9 billion annually
 - Average return rate for online fashion: 30–40%
 - Retailers absorb ~60% of return costs; the rest falls on consumers and the environment
 - ASOS, Next, and Zara have all publicly cited returns as a top strategic priority
